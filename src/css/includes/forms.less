@@ -1,0 +1,56 @@
+// ==================================================================================================================
+// Forms
+// ==================================================================================================================
+
+form
+{
+	label
+	{
+		margin-bottom : 5px;
+		font-size     : 16px;
+		display       : block;
+	}
+
+	span.required, abbr.required
+	{
+		color     : red;
+		font-size : 18px;
+		
+	}
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea
+{	
+	.transition(box-shadow 0.1s ease-in);
+
+	.box-shadow(1px 1px 1px rgba(50,50,50,0.1));
+
+	font-family  : @_font_family;
+	padding      : 0px 10px;
+	height       : 40px;
+	line-height  : 30px;
+	border       : 1px solid @_color_border;
+	font-size    : @_font_size;
+	color        : @_font_color;
+	line-height  : normal;
+	width        : 100%;
+
+	&:focus
+	{	
+		outline   : 0;
+		box-shadow: 0 0 4px rgba(36, 129, 229, 1);
+	}
+}
+
+textarea
+{	
+	padding    : 10px;
+	min-height : 150px;
+}
+
+select
+{
+	display : block;
+	width   : auto;
+}
+

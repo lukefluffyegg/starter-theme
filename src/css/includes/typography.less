@@ -1,0 +1,56 @@
+// ==================================================================================================================
+// Typography
+// ==================================================================================================================
+
+h1, h2, h3, h4, h5, p { margin-bottom : @_type_margin_bottom; font-weight : normal; }
+
+.h1 { font-size : @_h1_size; line-height : 1.2;}
+.h2 { font-size : @_h2_size }
+.h3 { font-size : @_h3_size }
+.h4 { font-size : @_h4_size }
+.h5 { font-size : @_h5_size }
+.p  { font-size : @_p_size }
+.small { font-size : @_small_size }
+
+h1 { .h1 }
+h2 { .h2 }
+h3 { .h3 }
+h4 { .h4 }
+h4 { .h4 }
+h5 { .h5 }
+p  { .p }
+
+div.tinymce-content
+{
+	h2, h3, h4, h5
+	{
+		margin-bottom : 10px;
+	}
+}
+
+// ==================================================================================================================
+// Links
+// ==================================================================================================================
+
+a
+{	
+	.transition(color 0.2s linear);
+
+	color           : @_link_color;
+	text-decoration : none;
+
+	&:hover
+	{
+		color : @_link_hover_color;
+	}
+
+	&.invert
+	{
+		color : @_link_hover_color;
+
+		&:hover
+		{
+			color : @_link_color;
+		}
+	}
+}

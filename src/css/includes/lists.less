@@ -1,0 +1,86 @@
+// ==================================================================================================================
+// Lists
+// ==================================================================================================================
+
+ul
+{
+	&.plain
+	{
+		list-style : none;
+
+		ul
+		{
+			list-style : none;
+		}
+	}
+
+	&.inline
+	{
+		.clearfix;
+
+		li
+		{
+			float : left;
+		}
+	}
+}
+
+ul.icons, div.tinymce-content ul
+{
+	margin-bottom : 20px;
+	padding-left  : 30px;
+	list-style    : none;
+
+	li
+	{
+		padding  : 3px 0px;
+		position : relative;
+
+		&:before
+		{
+			content     : '\f105';
+			font-family : 'icomoon';
+			color       : @_color_black;
+			font-size   : 18px;
+			position    : absolute;
+			top         : -0px;
+			left        : -15px;
+		}
+	}
+
+	ul
+	{
+		list-style   : none;
+		padding-left : 20px;
+	}
+}
+
+div.tinymce-content ol
+{
+	padding-left  : 30px;
+	margin-bottom : 20px;
+
+	ol
+	{
+		padding-left : 20px;
+	}
+}
+
+div.tinymce-content 
+{	
+	h1, h2, h3, h4, h5
+	{
+		+ ul
+		{
+			margin-top : -20px;
+		}
+	}
+}
+
+div.tinymce-content p
+{	
+	+ ul
+	{
+		margin-top : -10px;
+	}
+}

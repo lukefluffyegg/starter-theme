@@ -1,0 +1,107 @@
+
+.debug-width (@enabled) when (@enabled = true)
+{
+	&:before
+	{
+		content    : 'Full Width @{_full_width}';
+		position   : fixed;
+		top        : 0;
+		left       : 0;
+		color      : @_color_white;
+		font-size  : 12px;
+		background : @_color_black;
+		padding    : 3px 7px;
+
+		@media @_website { content : 'Website Width @{_website_width}'};
+		@media @_desktop { content : 'Desktop Width @{_desktop_width}'};
+		@media @_tablet  { content : 'Tablet Width @{_tablet_width}'};
+		@media @_mobile  { content : 'Mobile Width @{_mobile_width}'};
+	}
+}
+
+.clearfix
+{
+	&:after
+	{
+		content : '';
+		display : table;
+		clear   : both;
+	}
+}
+
+.transition (@arg)
+{
+	-webkit-transition : @arg;
+	-moz-transition    : @arg;
+	-o-transition      : @arg;
+	transition         : @arg;
+}
+
+.transition-transform (@duration, @easing)
+{
+	-webkit-transition : -webkit-transform @duration @easing;
+	-moz-transition    : -moz-transform @duration @easing;
+	-o-transition      : -o-transform @duration @easing;
+	-ms-transition     : -ms-transform @duration @easing;
+	transition         : transform @duration @easing;
+}
+
+.box-shadow (@arg)
+{
+	-webkit-box-shadow: @arg;
+	-moz-box-shadow:    @arg;
+	box-shadow:         @arg;		
+}
+
+.transform (@arg)
+{
+	-webkit-transform : @arg;
+	-moz-transform    : @arg;
+	-o-transform      : @arg;
+	-ms-transform     : @arg;
+	transform         : @arg;
+}
+
+.border-radius (@arg)
+{
+	-webkit-border-radius : @arg;
+	-moz-border-radius    : @arg;
+	border-radius         : @arg;
+}
+
+.border-radius-top-right (@arg)
+{
+	-webkit-border-top-right-radius : @arg;
+	-moz-border-top-right-radius : @arg;
+	border-top-right-radius : @arg;
+}
+
+.border-radius-bottom-right (@arg)
+{
+	-webkit-border-bottom-right-radius : @arg;
+	-moz-border-bottom-right-radius : @arg;
+	border-bottom-right-radius : @arg;
+}
+
+.border-radius-top-left (@arg)
+{
+	-webkit-border-top-left-radius : @arg;
+	-moz-border-top-left-radius : @arg;
+	border-top-left-radius : @arg;
+}
+
+.border-radius-bottom-left (@arg)
+{
+	-webkit-border-bottom-left-radius : @arg;
+	-moz-border-bottom-left-radius : @arg;
+	border-bottom-left-radius : @arg;
+}
+
+.opacity (@arg)
+{	
+	@ms_value : (@arg * 100);
+
+	-ms-filter : "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{ms_value})";
+	filter     : ~'alpha(opacity=@{ms_value})';				
+	opacity    : @arg;
+}

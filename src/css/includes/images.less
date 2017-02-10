@@ -1,0 +1,77 @@
+// ==================================================================================================================
+// Images
+// ==================================================================================================================
+
+img
+{
+	max-width : 100%;
+	height    : auto;
+	display   : inline-block;
+
+	.enlarge,
+	{	
+		position  : relative;
+		display   : inline-block;
+		z-index   : 1;
+		max-width : 100%;
+		
+	    &:before, &:after
+		{
+			.transition(opacity 0.2s linear);
+		}
+
+		&:before
+		{	
+			.opacity(0);
+
+			content    : '';	
+			position   : absolute;
+			top        : 0;
+			bottom     : 0;
+			left       : 0;
+			right      : 0;
+			background : @_color_black;
+			background : fade(@_color_black, 75%);
+			z-index    : 2;
+
+			html.ie8 &
+			{
+				background : none;
+			}
+		}
+
+		&:after
+		{
+			content     : '\e986';	
+			opacity     : 0;
+			font-family : 'icomoon';
+			color       : @_color_white;
+			font-size   : 26px;
+			position    : absolute;
+			top         : 50%;
+			left        : 50%;
+			margin-top  : -20px;
+			margin-left : -13px;
+			z-index     : 3;
+		}
+
+		&:hover
+		{
+			&:before, &:after
+			{	
+				.opacity(1);
+			}
+		}
+
+		img
+		{
+			display : block;
+
+			html.ie8
+			{
+				width : 100%;
+				height : auto;
+			}
+		}
+	}	
+}

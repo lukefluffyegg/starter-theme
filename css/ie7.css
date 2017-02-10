@@ -1,0 +1,10 @@
+body 
+{
+	min-width: 1100px;
+}
+
+*[class^="column-"],
+div.row
+{
+  *behavior: url(http://79.170.40.54/grosvenorgrass.com/wp-content/themes/grosvenorgrass/css/box-sizing.htc);
+}

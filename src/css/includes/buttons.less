@@ -1,0 +1,106 @@
+// ==================================================================================================================
+// Buttons
+// ==================================================================================================================
+
+.button
+{	
+	.transition(background 0.2s linear);
+	.border-radius(4px);
+
+	display                : inline-block;
+	color                  : @_color_white;
+	padding                : 6px 12px;
+	font-size              : @_font_size;
+	border                 : 0;
+	position               : relative;
+	font-weight            : 500;
+	-webkit-font-smoothing : inherit;
+	line-height            : inherit;
+
+	&:hover
+	{	
+		cursor : pointer;
+		color  : @_color_white;
+	}
+	
+	/*===============================
+	=            Colours            =
+	===============================*/
+	
+	&.black
+	{
+		background : @_color_black;
+
+		&:hover
+		{
+			background : darken(@_color_black, 7);
+		}
+	}
+
+	/*=============================
+	=            Sizes            =
+	=============================*/
+
+	&.small
+	{
+		font-size : 16px;
+	}
+
+	&.large
+	{
+		font-size : 28px;
+
+		@media @_mobile
+		{
+			font-size : 20px;
+		}
+	}
+
+	&.stretch
+	{
+		display : block;
+		width   : 100%;
+	}	
+
+	/*=============================
+	=            Icons            =
+	=============================*/
+
+	&.icon
+	{
+		padding-right : 40px;
+
+		&:before
+		{
+			content     : '\e600';
+			font-family : 'icomoon';
+			color       : @_color_black;
+			position    : absolute;
+			right       : 10px;
+			top         : 50%;
+			margin-top  : -13px;
+		}
+
+		&.small
+		{
+			padding-right : 30px;
+
+			&:before
+			{
+				right      : 10px;
+				margin-top : -11px;
+			}
+		}
+
+		&.large
+		{
+			padding-right : 45px;
+
+			&:before
+			{
+				right      : 10px;
+				margin-top : -18px;
+			}
+		}
+	}
+}

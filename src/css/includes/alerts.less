@@ -1,0 +1,116 @@
+// ==================================================================================================================
+// Alerts
+// ==================================================================================================================
+
+/*=============================
+=            Alert            =
+=============================*/
+
+.alert
+{	
+	.opacity(0.5);
+	.border-radius(5px);
+
+	position      : relative;
+	padding       : 15px 10px;
+	width         : 100%;
+	margin-bottom : 20px;
+	border-style  : solid;
+	border-width  : 1px;
+	
+	h5
+	{
+		margin-bottom : 0px;
+		font-weight   : 800;
+	}
+
+	p:last-of-type
+	{
+		margin-bottom : 0px;
+	}
+	
+	/*====================================
+	=            Close Button            =
+	====================================*/
+	
+	.close
+	{
+		position : absolute;
+		top      : 5px;
+		right    : 5px;
+		height   : 20px;
+		width    : 20px;
+
+		&:before
+		{	
+			.transition(color 0.2s linear);
+
+			font-family : 'icomoon';
+			content     : '\ea0f';
+			font-size   : 14px;
+			display     : block;
+			color       : @_color_white;
+		}
+
+		&:hover
+		{
+			cursor : pointer;
+		}
+	}
+
+	/*======================================
+	=            Positive Alert            =
+	======================================*/
+	
+	&.positive
+	{
+		border-color : @_color_positive;
+		background   : #e7f6f5;
+
+		a.close:before       { color : fadeout(@_color_positive, 60%); }
+		a.close:hover:before { color : @_color_positive; }
+
+		h5, strong
+		{
+			color : @_color_positive;
+		}
+	}
+
+	/*======================================
+	=            Negative Alert            =
+	======================================*/
+	
+	&.negative
+	{
+		a.close:before       { color : fadeout(@_color_negative, 60%); }
+		a.close:hover:before { color : @_color_negative; }
+		
+		border-color : @_color_negative;
+		background   : #fdebe8;
+
+		h5, strong
+		{
+			color : @_color_negative;
+		}		
+	}
+
+	/*=====================================
+	=            Warning Alert            =
+	=====================================*/
+
+	&.warning
+	{
+		a.close:before       { color : fadeout(@_color_warning, 60%); }
+		a.close:hover:before { color : @_color_warning; }
+
+		border-color : @_color_warning;
+		background   : #fff7e7;
+
+		h5, strong
+		{
+			color       : @_color_warning;
+			font-weight : 600;
+		}				
+	}
+}
+
