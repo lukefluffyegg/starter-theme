@@ -1,86 +1,120 @@
 <?php
 
-$themename = 'Starter Theme';
-$shortname = 'starter';
-$settings_list = array(
-    'custom_logo_url',
-    'header_text',
-    'email_address',
-    'telephone',
-    'facebook_link',
-    'twitter_link',
-    'youtube_link',
-);
+function theme_settings_page(){}
 
-function StarterTheme_add_admin() {
-    global $themename, $shortname, $settings_list;
-     if(!empty($_GET['page'])) {
-    if($_GET['page'] == basename(__FILE__)) {
-        if('save' == $_REQUEST['action']) {
-            foreach($settings_list as $value) {
-                update_option($shortname . '_' . $value,$_REQUEST[$value]);
-            }
-            header("Location: themes.php?page=settings.php&saved=success");
-            die();
-        }
+function add_theme_menu_item()
+{
+    add_menu_page("Theme Panel", "Theme Panel", "manage_options", "theme-panel", "theme_settings_page", null, 99);
+}
+
+add_action("admin_menu", "add_theme_menu_item");
+
+function theme_settings_page()
+{
+    ?>
+        <div class="wrap">
+        <h1>Theme Panel</h1>
+        <form method="post" action="options.php">
+            <?php
+                settings_fields("section");
+                do_settings_sections("theme-options");      
+                submit_button(); 
+            ?>          
+        </form>
+        </div>
+    <?php
+}
+
+function display_twitter_element()
+{
+    ?>
+        <input type="text" name="twitter_url" id="twitter_url" value="<?php echo get_option('twitter_url'); ?>" />
+    <?php
+}
+
+function display_facebook_element()
+{
+    ?>
+        <input type="text" name="facebook_url" id="facebook_url" value="<?php echo get_option('facebook_url'); ?>" />
+    <?php
+}
+
+function display_theme_panel_fields()
+{
+    add_settings_section("section", "All Settings", null, "theme-options");
+    
+    add_settings_field("twitter_url", "Twitter Profile Url", "display_twitter_element", "theme-options", "section");
+    add_settings_field("facebook_url", "Facebook Profile Url", "display_facebook_element", "theme-options", "section");
+
+    register_setting("section", "twitter_url");
+    register_setting("section", "facebook_url");
+}
+
+add_action("admin_init", "display_theme_panel_fields");
+
+function display_twitter_element()
+{
+    ?>
+        <input type="text" name="twitter_url" id="twitter_url" value="<?php echo get_option('twitter_url'); ?>" />
+    <?php
+}
+
+function display_facebook_element()
+{
+    ?>
+        <input type="text" name="facebook_url" id="facebook_url" value="<?php echo get_option('facebook_url'); ?>" />
+    <?php
+}
+
+function display_layout_element()
+{
+    ?>
+        <input type="checkbox" name="theme_layout" value="1" <?php checked(1, get_option('theme_layout'), true); ?> /> 
+    <?php
+}
+
+function display_theme_panel_fields()
+{
+    add_settings_section("section", "All Settings", null, "theme-options");
+    
+    add_settings_field("twitter_url", "Twitter Profile Url", "display_twitter_element", "theme-options", "section");
+    add_settings_field("facebook_url", "Facebook Profile Url", "display_facebook_element", "theme-options", "section");
+    add_settings_field("theme_layout", "Do you want the layout to be responsive?", "display_layout_element", "theme-options", "section");
+
+    register_setting("section", "twitter_url");
+    register_setting("section", "facebook_url");
+    register_setting("section", "theme_layout");
+}
+
+add_action("admin_init", "display_theme_panel_fields");
+
+function logo_display()
+{
+    ?>
+        <input type="file" name="logo" /> 
+        <?php echo get_option('logo'); ?>
+   <?php
+}
+
+function handle_logo_upload()
+{
+    if(!empty($_FILES["demo-file"]["tmp_name"]))
+    {
+        $urls = wp_handle_upload($_FILES["logo"], array('test_form' => FALSE));
+        $temp = $urls["url"];
+        return $temp;   
     }
-
+      
+    return $option;
 }
 
-   add_theme_page($themename." Settings", $themename. " Settings", 'edit_themes', basename(__FILE__), 'theme_admin');
+function display_theme_panel_fields()
+{
+    add_settings_section("section", "All Settings", null, "theme-options");
+    
+    add_settings_field("logo", "Logo", "logo_display", "theme-options", "section");  
+
+    register_setting("section", "logo", "handle_logo_upload");
 }
 
-function theme_admin() {
-    global $themename, $shortname, $settings_list;
-    if($_REQUEST['saved']) echo '<div id="message" class="updated fade"><p><strong>'. $themename .' settings sved.</strong></p>';
-    if($_REQUEST['reset']) echo '<div id="message" class="updated fade"><p><strong>'. $themename .' settings reset</strong></p>';
- ?>
- <style>
-    table { border:none; }
-    td { padding: 5px;  }
-    .ss_text {width: 350px;}
- </style>
-  <div class="wrap">
-    <h2><?= $themename; ?> Theme Options</h2>
-     <form method="post">
-        <table>
-        <tr>
-            <td>Logo URL</td>
-            <td><input type="text" name="custom_logo_url" class="ss_text" value="<?php echo stripcslashes(stripslashes(get_option($shortname.'_custom_logo_url',''))); ?>"><br><small><a href="<?php bloginfo('url'); ?>/wp-admin/media-new.php" target="_blank">Upload a new Logo</a>(300px x 100px)</small></td>
-        </tr>
-         <tr>
-            <td>Home page Header</td>
-            <td><input type="text" name="header_text" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_header_text',''))); ?>"></td>
-
-        </tr>
-        <tr>
-          <td>Email Address:</td>
-          <td><input type="email" name="email_address" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_email_address'))); ?>"></td>
-        </tr>
-        <tr>
-          <td>Telephone Number:</td>
-          <td><input type="text" name="telephone" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_telephone'))); ?>"></td>
-        </tr>
-        <tr>
-            <td>Facebook Link:</td>
-            <td><input type="text" name="facebook_link" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_facebook_link',''))); ?>"></td>
-        </tr>
-        <tr>
-            <td>Twitter link:</td>
-            <td><input type="text" name="twitter_link" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_twitter_link')));  ?>"></td>
-        </tr>
-        <tr>
-            <td>Youtube Link:</td>
-            <td><input type="text" name="youtube_link" class="ss_text" value="<?php echo stripslashes(stripslashes(get_option($shortname.'_youtube_link'))); ?>"></td>
-        </tr>
-        </table>
-          <p class="submit">
-            <input name="save" type="submit" value="Save Changes">
-            <input type="hidden" name="action" value="save">
-         </p>
-     </form>
-   </div>
-<?php
-}
-add_action('admin_menu', 'StarterTheme_add_admin');
-?>
+add_action("admin_init", "display_theme_panel_fields");
